@@ -1,0 +1,11 @@
+
+
+
+# OBJ BIN.
+obj/
+bin/
+**/bin/
+**/obj/
+
+
+.vs/

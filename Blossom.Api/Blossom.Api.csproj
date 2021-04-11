@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blossom.Api.Model\Blossom.Api.Model.csproj" />
+    <ProjectReference Include="..\Blossom.DependencyInjection\Blossom.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Blossom.Mapping\Blossom.Mapping.csproj" />
+    <ProjectReference Include="..\Blossom.Service.Model\Blossom.Service.Model.csproj" />
+    <ProjectReference Include="..\Blossom.Service\Blossom.Service.csproj" />
+  </ItemGroup>
+
+
+</Project>
