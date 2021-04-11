@@ -1,9 +1,7 @@
 namespace Blossom.Service.Model.StudentProfiles
 {
-    public class StudentProfile
+    public class StudentProfile : ModelWithGuidId
     {
-        public string Id { get; set; }
-
         public string University { get; set; }
 
         public string Degree { get; set; }

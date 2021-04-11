@@ -51,6 +51,13 @@ namespace Blossom.Api.Controllers
             return Ok(_mapper.Map<ApplicationUserResource>(user));
         }
 
+        [HttpGet("{authId}")]
+        public IActionResult GetById([FromRoute] string authId)
+        {
+            var user = _userService.GetByAuthId(authId);
+            return Ok(_mapper.Map<ApplicationUserResource>(user));
+        }
+
         [HttpPut("{id}")]
         public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] UpdateUserRequest request)
         {

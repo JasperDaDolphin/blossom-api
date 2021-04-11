@@ -1,9 +1,7 @@
 namespace Blossom.Service.Model.BusinessProfiles
 {
-    public class BusinessProfile
+    public class BusinessProfile : ModelWithGuidId
     {
-        public string Id { get; set; }
-
         public string Name { get; set; }
 
         public string Website { get; set; }

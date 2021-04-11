@@ -4,10 +4,8 @@ using System;
 
 namespace Blossom.Service.Model.Users
 {
-    public class User
+    public class User: ModelWithGuidId
     {
-        public Guid Id { get; set; }
-
         public string AuthId { get; set; }
 
         public string Email { get; set; }

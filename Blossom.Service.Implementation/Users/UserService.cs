@@ -29,7 +29,6 @@ namespace Blossom.Service.Implementation.Users
         {
             var userEntity = new UserEntity
             {
-                Id = user.Id,
                 AuthId = user.AuthId,
                 Name = user.Name,
                 Email = user.Email,
@@ -65,7 +64,6 @@ namespace Blossom.Service.Implementation.Users
         public User UpdateUser(User user)
         {
             var userEntity = _mapper.Map<UserEntity>(user);
-
             return _mapper.Map<User>(_userRepository.Update(userEntity));
         }
     }

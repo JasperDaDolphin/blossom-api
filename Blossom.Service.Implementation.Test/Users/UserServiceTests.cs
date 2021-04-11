@@ -32,16 +32,29 @@ namespace Blossom.Service.Implementation.Test
         public void TestUserCreated()
         {
             //Setup
-            var g = Guid.NewGuid();
-            var user = new User() { Id = g, Name = "Alexander Mitrakis", Email = "alex@mitrakis.net", AuthId = "amitrakis" };
+            var user = new User() { Name = "Alexander Mitrakis", Email = "alex@mitrakis.net", AuthId = "amitrakis" };
 
             //Act
             var userCreated = _userService.CreateUser(user);
 
             //Assert
             Assert.NotNull(userCreated, "User should not be null");
-            var userQuery = _userService.GetById(g);
+            var userQuery = _userService.GetById(userCreated.Id);
             Assert.NotNull(userQuery, "User should be in Database");
+        }
+
+        [Test]
+        public void TestGetUserByAuthId()
+        {
+            //Setup
+            var user = new User() { Name = "Alexander Mitrakis", Email = "alex@mitrakis.net", AuthId = "amitrakis" };
+            var userCreated = _userService.CreateUser(user);
+
+            //Act
+            var userObject = _userService.GetByAuthId(userCreated.AuthId);
+
+            //Assert
+            Assert.NotNull(userObject, "User should not be null");
         }
 
         [Test]
@@ -50,8 +63,7 @@ namespace Blossom.Service.Implementation.Test
             //Setup
             for (var i = 0; i < 100; i++)
 			{
-                var g = Guid.NewGuid();
-                var user = new User() { Id = g, Name = "Alexander Mitrakis", Email = "alex@mitrakis.net", AuthId = $"amitrakis{i}" };
+                var user = new User() { Name = "Alexander Mitrakis", Email = "alex@mitrakis.net", AuthId = $"amitrakis{i}" };
                 _userService.CreateUser(user);
             }
 
@@ -66,8 +78,7 @@ namespace Blossom.Service.Implementation.Test
         public void TestUpdateUser()
         {
             //Setup
-            var g = Guid.NewGuid();
-            var user = new User() { Id = g, Name = "Alexander Mitrakis", Email = "alex@mitrakis.net", AuthId = "amitrakis" };
+            var user = new User() { Name = "Alexander Mitrakis", Email = "alex@mitrakis.net", AuthId = "amitrakis" };
             var userCreated = _userService.CreateUser(user);
 
             //Act
@@ -76,7 +87,7 @@ namespace Blossom.Service.Implementation.Test
             _userService.UpdateUser(userCreated);
 
             //Assert
-            var userQuery = _userService.GetById(g);
+            var userQuery = _userService.GetById(userCreated.Id);
             Assert.NotNull(userQuery, "User should be in Database");
             Assert.AreEqual("Test Name", userQuery.Name);
             Assert.AreEqual("Test@test.com", userQuery.Email);
@@ -86,15 +97,14 @@ namespace Blossom.Service.Implementation.Test
         public void TestDeleteUser()
         {
             //Setup
-            var g = Guid.NewGuid();
-            var user = new User() { Id = g, Name = "Alexander Mitrakis", Email = "alex@mitrakis.net", AuthId = "amitrakis" };
+            var user = new User() { Name = "Alexander Mitrakis", Email = "alex@mitrakis.net", AuthId = "amitrakis" };
             var userCreated = _userService.CreateUser(user);
 
             //Act
-            _userService.DeleteUser(g);
+            _userService.DeleteUser(userCreated.Id);
 
             //Assert
-            var userQuery = _userService.GetById(g);
+            var userQuery = _userService.GetById(userCreated.Id);
             Assert.Null(userQuery, "User should be removed");
         }
     }
