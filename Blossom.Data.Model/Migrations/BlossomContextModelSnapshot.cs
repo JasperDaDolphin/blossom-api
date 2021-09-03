@@ -4,7 +4,6 @@ using Blossom.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Blossom.Data.Model.Migrations
 {
@@ -15,45 +14,55 @@ namespace Blossom.Data.Model.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.5")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64)
+                .HasAnnotation("ProductVersion", "5.0.5");
 
             modelBuilder.Entity("Blossom.Data.Model.BusinessProfiles.BusinessProfileEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("char(36)")
                         .HasColumnName("id");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("DateTime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("DateTime");
 
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("location");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("name");
 
-                    b.Property<string>("Number")
-                        .HasColumnType("text");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Size")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("size");
 
                     b.Property<string>("Type")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Website")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("bc_businessprofile");
                 });
@@ -62,31 +71,63 @@ namespace Blossom.Data.Model.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("char(36)")
                         .HasColumnName("id");
 
-                    b.Property<string>("Degree")
-                        .HasColumnType("text");
+                    b.Property<string>("About")
+                        .HasColumnType("longtext");
 
-                    b.Property<string>("Graduating")
-                        .HasColumnType("text");
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("DateTime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("DateTime");
+
+                    b.Property<string>("Degree")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("GraduationYear")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Majors")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Skills")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("StartingYear")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("State")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("University")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("WorkingStatus")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("bc_studentprofile");
                 });
@@ -95,55 +136,55 @@ namespace Blossom.Data.Model.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("char(36)")
                         .HasColumnName("id");
 
                     b.Property<string>("AuthId")
                         .IsRequired()
                         .HasMaxLength(127)
-                        .HasColumnType("character varying(127)")
+                        .HasColumnType("varchar(127)")
                         .HasColumnName("authId");
-
-                    b.Property<Guid?>("BusinessProfileId")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("email");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("name");
-
-                    b.Property<Guid?>("StudentProfileId")
-                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AuthId")
                         .IsUnique();
 
-                    b.HasIndex("BusinessProfileId");
-
-                    b.HasIndex("StudentProfileId");
-
                     b.ToTable("bc_user");
+                });
+
+            modelBuilder.Entity("Blossom.Data.Model.BusinessProfiles.BusinessProfileEntity", b =>
+                {
+                    b.HasOne("Blossom.Data.Model.Users.UserEntity", "User")
+                        .WithMany("BusinessProfile")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Blossom.Data.Model.StudentProfiles.StudentProfileEntity", b =>
+                {
+                    b.HasOne("Blossom.Data.Model.Users.UserEntity", "User")
+                        .WithMany("StudentProfile")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Blossom.Data.Model.Users.UserEntity", b =>
                 {
-                    b.HasOne("Blossom.Data.Model.BusinessProfiles.BusinessProfileEntity", "BusinessProfile")
-                        .WithMany()
-                        .HasForeignKey("BusinessProfileId");
-
-                    b.HasOne("Blossom.Data.Model.StudentProfiles.StudentProfileEntity", "StudentProfile")
-                        .WithMany()
-                        .HasForeignKey("StudentProfileId");
-
                     b.Navigation("BusinessProfile");
 
                     b.Navigation("StudentProfile");

@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Blossom.Data.Implementation\Blossom.Data.Implementation.csproj" />
     <ProjectReference Include="..\Blossom.Data\Blossom.Data.csproj" />
     <ProjectReference Include="..\Blossom.Service\Blossom.Service.csproj" />
   </ItemGroup>

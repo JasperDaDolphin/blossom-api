@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Blossom.Api.Core.Authentication
+namespace Blossom.Api.Model.Authentication
 {
     public class HasScopeRequirement : IAuthorizationRequirement
     {

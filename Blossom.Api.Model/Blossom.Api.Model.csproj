@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Blossom.Service.Implementation\Blossom.Service.Implementation.csproj" />
     <ProjectReference Include="..\Blossom.Service.Model\Blossom.Service.Model.csproj" />
     <ProjectReference Include="..\Blossom.Service\Blossom.Service.csproj" />

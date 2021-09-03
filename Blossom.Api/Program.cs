@@ -15,7 +15,7 @@ namespace Blossom.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                        .UseUrls("http://localhost:8000");
-                });
+                        .UseUrls("https://localhost:5000");
+				});
 	}
 }

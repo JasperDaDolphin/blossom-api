@@ -13,8 +13,8 @@ namespace Blossom.Data.Model.Users
 
         public string Name { get; set; }
 
-        public StudentProfileEntity StudentProfile { get; set; }
+        public ICollection<StudentProfileEntity> StudentProfile { get; set; }
 
-        public BusinessProfileEntity BusinessProfile { get; set; }
+        public ICollection<BusinessProfileEntity> BusinessProfile { get; set; }
     }
 }

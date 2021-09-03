@@ -12,9 +12,10 @@ namespace Blossom.Data.Model
         public BlossomContext CreateDbContext(string[] args = null)
         {
             var optionsBuilder = new DbContextOptionsBuilder<BlossomContext>();
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Blossom;Username=postgres;Password=password");
+            var serverVersion = new MySqlServerVersion("8.0.20");
+            optionsBuilder.UseMySql("server=localhost;port=3306;database=blossom.careers;user=root;password=", serverVersion);
 
-            return new BlossomContext(optionsBuilder.Options);
+			return new BlossomContext(optionsBuilder.Options);
         }
     }
 }

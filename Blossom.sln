@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blossom.Service.Implementat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blossom.Data.Migrations", "Blossom.Data.Migrations\Blossom.Data.Migrations.csproj", "{527138BA-06A8-4079-A613-8580FD1437B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blossom.Service.Implementation.Test", "Blossom.Service.Implementation.Test\Blossom.Service.Implementation.Test.csproj", "{60DC0D64-C358-42CC-B82A-ACC4CA4F5748}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blossom.Service.Implementation.Test", "Blossom.Service.Implementation.Test\Blossom.Service.Implementation.Test.csproj", "{60DC0D64-C358-42CC-B82A-ACC4CA4F5748}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blossom.Api.Test", "Blossom.Api.Test\Blossom.Api.Test.csproj", "{AB8B2F0C-95DA-43A3-9CBA-77F2D666C808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{60DC0D64-C358-42CC-B82A-ACC4CA4F5748}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60DC0D64-C358-42CC-B82A-ACC4CA4F5748}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60DC0D64-C358-42CC-B82A-ACC4CA4F5748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB8B2F0C-95DA-43A3-9CBA-77F2D666C808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8B2F0C-95DA-43A3-9CBA-77F2D666C808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB8B2F0C-95DA-43A3-9CBA-77F2D666C808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8B2F0C-95DA-43A3-9CBA-77F2D666C808}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

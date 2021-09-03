@@ -48,16 +48,25 @@ namespace Blossom.Data.Implementation.Users
             return entity;
         }
 
-        public override UserEntity Update(UserEntity inputUser)
+        public override UserEntity Update(UserEntity input)
         {
-            var userEntity = _context.Set<UserEntity>()
-                .Single(u => u.Id == inputUser.Id);
+            var entity = this.GetById(input.Id);
 
-            userEntity.Name = inputUser.Name;
-            userEntity.Email = inputUser.Email;
+            if (entity != null)
+            {
+                if (input.Name != null)
+                {
+                    entity.Name = input.Name;
+                }
 
-            _context.SaveChanges();
-            return userEntity;
+                _context.SaveChanges();
+            }
+            else
+			{
+                throw new ArgumentException("User not found.");
+            }
+
+            return entity;
         }
     }
 }

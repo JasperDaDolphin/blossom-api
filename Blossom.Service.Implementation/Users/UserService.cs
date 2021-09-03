@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Linq.Expressions;
 using AutoMapper;
-
+using Blossom.Data.Implementation;
 using Blossom.Data.Model.Users;
 using Blossom.Data.Users;
 using Blossom.Service.Model.Users;
@@ -43,9 +43,9 @@ namespace Blossom.Service.Implementation.Users
             _userRepository.Delete(id);
         }
 
-        public List<User> GetAll()
+        public List<User> GetAll(Expression<Func<UserEntity, bool>> filter = null)
         {
-            var userEntities = _userRepository.Get();
+            var userEntities = _userRepository.Get(filter);
             return _mapper.Map<List<User>>(userEntities);
         }
 

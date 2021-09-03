@@ -9,15 +9,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCoreRateLimit" Version="4.0.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Flee" Version="1.2.2" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
+    <PackageReference Include="WebApiThrottle" Version="1.5.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blossom.Api.Model\Blossom.Api.Model.csproj" />
     <ProjectReference Include="..\Blossom.DependencyInjection\Blossom.DependencyInjection.csproj" />
     <ProjectReference Include="..\Blossom.Mapping\Blossom.Mapping.csproj" />
+    <ProjectReference Include="..\Blossom.Service.Implementation\Blossom.Service.Implementation.csproj" />
     <ProjectReference Include="..\Blossom.Service.Model\Blossom.Service.Model.csproj" />
     <ProjectReference Include="..\Blossom.Service\Blossom.Service.csproj" />
   </ItemGroup>

@@ -5,23 +5,13 @@ namespace Blossom.Api.Model.Users
 {
     public class CreateUserRequest
     {
-        [Required]
-        [MaxLength(50)]
-        public string FirstName { get; set; }
+        [Required(ErrorMessage = "AuthId is required")]
+        public string AuthId { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string LastName { get; set; }
+        public string Name { get; set; }
 
-        [Required]
-        [MaxLength(255)]
-        public string Username { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string Password { get; set; }
-
-        [Required]
-        public List<int> PermissionIds { get; set; } = new List<int>();
+        [EmailAddress]
+        [Required(ErrorMessage = "Email is required")]
+        public string Email { get; set; }
     }
 }

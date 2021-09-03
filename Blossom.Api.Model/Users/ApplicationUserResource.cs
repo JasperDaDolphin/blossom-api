@@ -1,20 +1,24 @@
+using Blossom.Api.Model.BusinessProfiles;
+using Blossom.Api.Model.StudentProfiles;
 using Blossom.Data.Model.BusinessProfiles;
 using Blossom.Data.Model.StudentProfiles;
+using System;
+using System.Collections.Generic;
 
 namespace Blossom.Api.Model.Users
 {
     public class ApplicationUserResource
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Email { get; set; }
 
-        public string Username { get; set; }
+        public string AuthId { get; set; }
 
         public string Name { get; set; }
 
-        public StudentProfileEntity StudentProfile { get; set; }
+        public ICollection<ApplicationStudentProfileResource> StudentProfile { get; set; }
 
-        public BusinessProfileEntity BusinessProfile { get; set; }
+        public ICollection<ApplicationBusinessProfileResource> BusinessProfile { get; set; }
     }
 }

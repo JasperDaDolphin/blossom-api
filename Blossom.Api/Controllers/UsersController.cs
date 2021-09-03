@@ -2,19 +2,28 @@ using System.Collections.Generic;
 
 using AutoMapper;
 
-using Microsoft.AspNetCore.Authorization;
+using Blossom.Data.Implementation;
 using Microsoft.AspNetCore.Mvc;
-
 using Blossom.Api.Model.Users;
 using Blossom.Service.Model.Users;
 using Blossom.Service.Users;
 using System;
+using Blossom.Data.Model.Users;
+using System.Linq.Expressions;
+using Flee.PublicTypes;
+using System.Reflection;
+using System.Linq;
+using System.Text.Json;
+using Blossom.Data;
+using Newtonsoft.Json;
+using Blossom.Api.Model.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Blossom.Api.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
     [ApiController]
-    [Route("api/users")]
+    [Route("api/user")]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -30,6 +39,7 @@ namespace Blossom.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policies.DeleteUser)]
         public IActionResult DeleteUser([FromRoute] Guid id)
         {
             _userService.DeleteUser(id);
@@ -37,28 +47,31 @@ namespace Blossom.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public IActionResult GetAll()
+        [Authorize(Policies.ReadUserAll)]
+        public IActionResult GetAll([FromQuery(Name = "query")] string? filters = "")
         {
-            return Ok(_mapper.Map<List<ApplicationUserResource>>(_userService.GetAll()));
+            var expressionFilters = PredicateBuilder.CreateExpressions<UserEntity>(filters);
+            return Ok(_mapper.Map<List<ApplicationUserResource>>(_userService.GetAll(expressionFilters)));
         }
 
-        [HttpGet("{id}")]
-        [Authorize("view:profile")]
+        [HttpPost]
+        [Authorize(Policies.CreateUser)]
+        public IActionResult CreateUser([FromBody] CreateUserRequest request)
+        {
+            var user = _mapper.Map<User>(request);
+            return Ok(_userService.CreateUser(user));
+        }
+
+		[HttpGet("{id}")]
+        [Authorize(Policies.ReadUser)]
         public IActionResult GetById([FromRoute] Guid id)
         {
             var user = _userService.GetById(id);
             return Ok(_mapper.Map<ApplicationUserResource>(user));
         }
 
-        [HttpGet("{authId}")]
-        public IActionResult GetById([FromRoute] string authId)
-        {
-            var user = _userService.GetByAuthId(authId);
-            return Ok(_mapper.Map<ApplicationUserResource>(user));
-        }
-
         [HttpPut("{id}")]
+        [Authorize(Policies.UpdateUser)]
         public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] UpdateUserRequest request)
         {
             var user = _mapper.Map<User>(request);
